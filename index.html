@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riskor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><b>Riskor</b></li>
+            </ul>
+
+            <ul>
+                <li><a href="#">Integrantes</a></li>
+                <li><a href="#">Tareas</a></li>
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="#" role="button">Cerrar sesion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Integrantes del equipo</h2>
+        <table class="overflow-auto striped">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tBody"></tbody>
+        </table>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
