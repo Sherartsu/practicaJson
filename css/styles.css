@@ -4,3 +4,52 @@
     gap: 5px;
     box-sizing: border-box;
 }
+
+#btnOpenModal{
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    transition: all .5s;
+}
+
+#btnOpenModal:hover{
+    transform: scale(1.2);
+}
+
+table{
+    width: 100%;
+}
+
+.containerModal{
+    width: 100dvw;
+    height: 100dvh;
+    position: absolute;
+    z-index: 30;
+    background-color: #fffa;
+    justify-content: center;
+    align-items: center;
+}
+
+#formAddData{
+    background-color: #fff;
+    width: 50%;
+    padding: 30px;
+}
+
+.bodyOverflow{
+    overflow: hidden;
+}
+
+.modalClose{
+    display: none;
+}
+
+.modalOpen{
+    display: flex;
+}
