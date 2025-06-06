@@ -10,8 +10,8 @@
 <body>
 
 
-    <div class="containerModal modalClose">
-        <form id="formAddData">
+    <div class="containerModal modalClose modalStyle">
+        <form id="formAddData" class="formAddData">
             <fieldset>
                 <label for="txtName">Nombres</label>
                 <input id="txtName" type="text" name="Nombre"/>
@@ -21,6 +21,21 @@
                 <input type="email" name="Correo" id="txtEmail"/>
             </fieldset>
             <input type="submit" id="btnAddData" value="Enviar"/>
+          </form>
+    </div>
+
+    <div class="containerUpdateModal modalClose modalStyle">
+        <form id="formUpdateData" class="formAddData">
+            <fieldset>
+                <input type="text" id="txtUpdateId" style="position: absolute; visibility: hidden;">
+                <label for="txtUpdateName">Nombres</label>
+                <input id="txtUpdateName" type="text" name="Nombre"/>
+                <label for="txtUpdateLastname">Apellidos</label>
+                <input type="text" id="txtUpdateLastname" name="Apellido"/>
+                <label for="txtUpdateEmail">Correo</label>
+                <input type="email" name="Correo" id="txtUpdateEmail"/>
+            </fieldset>
+            <input type="submit" id="btnUpdateData" value="Enviar"/>
           </form>
     </div>
 

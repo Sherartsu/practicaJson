@@ -6,14 +6,56 @@ let tBody = document.getElementById("tBody");
 let btnOpenModal = document.getElementById('btnOpenModal');
 let formAddData = document.getElementById('formAddData');
 let modal = document.querySelector('.containerModal');
-let btnDelete;
+let updateModal = document.querySelector('.containerUpdateModal');
+let btnUpdateData = document.getElementById('btnUpdateData');
+let formUpdateData = document.getElementById('formUpdateData');
 
 document.addEventListener('click', (e) => {
     if(e.target === modal){
         modal.classList.replace('modalOpen', 'modalClose')
         document.body.classList.remove('bodyOverflow');
+    } else if (e.target === updateModal){
+        updateModal.classList.replace('modalOpen', 'modalClose')
+        document.body.classList.remove('bodyOverflow');
     }
 })
+
+formUpdateData.addEventListener('submit', (e) => {
+    e.preventDefault();
+})
+
+tBody.addEventListener('click', (e) => {
+    if(e.target.classList.contains('btnDelete')){
+        deleteData(e);
+    } else if(e.target.classList.contains('btnUpdate')) {
+        chargeData(e);
+    }
+})
+
+function chargeData(e){
+    updateModal.classList.replace('modalClose', 'modalOpen');
+    document.body.classList.add('bodyOverflow');
+    let tr = e.target.closest('.row');
+    document.getElementById('txtUpdateId').value = tr.children[0].textContent;
+    document.getElementById('txtUpdateName').value = tr.children[1].textContent;
+    document.getElementById('txtUpdateLastname').value = tr.children[2].textContent;
+    document.getElementById('txtUpdateEmail').value = tr.children[3].textContent;
+}
+
+btnUpdateData.addEventListener('click', () => {
+    updateData();
+})
+
+async function deleteData(e) {
+    let tr = e.target.closest('.row');
+    let id = tr.querySelector('.id').textContent;
+
+    await fetch(`${API_URL}/${id}`, {
+        method: "DELETE"
+    })
+
+    loadData();
+}
 
 formAddData.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -34,7 +76,6 @@ async function loadData() {
         let response = await fetch(API_URL);
         let data = await response.json();
         showData(data);
-        btnDelete = document.querySelectorAll('.btnDelete');
     } catch (error) {
         console.log(error)
     }
@@ -65,7 +106,9 @@ async function showData(data){
 
         tdButtons.classList.add('tdButtons');
         btnDelete.classList.add('btnDelete');
+        btnUpdate.classList.add('btnUpdate')
         id.classList.add('id');
+        tr.classList.add('row');
 
         tr.appendChild(id);
         tr.appendChild(name);
@@ -96,7 +139,7 @@ async function addData() {
             Correo
         }
         
-        let request = fetch(API_URL, {
+        fetch(API_URL, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -105,6 +148,41 @@ async function addData() {
         })
 
         modal.classList.replace('modalOpen', 'modalClose')
+        document.body.classList.remove('bodyOverflow')
+
+        loadData();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+async function updateData() {
+    try {
+        let id = document.getElementById('txtUpdateId').value.trim();
+        let Nombre = document.getElementById('txtUpdateName').value.trim();
+        let Apellido = document.getElementById('txtUpdateLastname').value.trim();
+        let Correo = document.getElementById('txtUpdateEmail').value.trim();
+
+        if(!Nombre && !Apellido && Correo){
+            return;
+        }
+
+        let data = {
+            Nombre,
+            Apellido,
+            Correo
+        }
+        
+        await fetch(`${API_URL}/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+
+        updateModal.classList.replace('modalOpen', 'modalClose')
         document.body.classList.remove('bodyOverflow')
 
         loadData();

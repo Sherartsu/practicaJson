@@ -26,17 +26,17 @@ table{
     width: 100%;
 }
 
-.containerModal{
+.modalStyle{
     width: 100dvw;
     height: 100dvh;
-    position: absolute;
+    position: fixed;
     z-index: 30;
     background-color: #fffa;
     justify-content: center;
     align-items: center;
 }
 
-#formAddData{
+.formAddData{
     background-color: #fff;
     width: 50%;
     padding: 30px;
